@@ -1,0 +1,37 @@
+
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+<nav class="navbar navbar-light bg-light">
+    <form class="form-inline" action="" method="GET">
+      <input class="form-control mr-sm-2" type="search" name="movie_name" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </nav>
+
+
+{% for movie_item in movie_objects  %}
+{{movie_item.name}}
+</br>    
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if movie_objects.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ movie_objects.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ movie_objects.number }} of {{ movie_objects.paginator.num_pages }}.
+        </span>
+
+        {% if movie_objects.has_next %}
+            <a href="?page={{ movie_objects.next_page_number }}">next</a>
+            <a href="?page={{ movie_objects.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
